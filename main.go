@@ -32,8 +32,8 @@ func runSpeedTest(speedtestClient *speedtest.Speedtest, writeAPI api.WriteAPIBlo
 		s.DownloadTest()
 		s.UploadTest()
 
-		downloadSpeed := float64(s.DLSpeed) / bytesToMegabytes
-		uploadSpeed := float64(s.ULSpeed) / bytesToMegabytes
+		downloadSpeed := s.DLSpeed.Mbps()
+		uploadSpeed := s.ULSpeed.Mbps()
 
 		fmt.Printf("Latency: %s, Download: %.2f Mbps, Upload: %.2f Mbps\n", s.Latency, downloadSpeed, uploadSpeed)
 		writeResultToInfluxDB(writeAPI, s.Latency.Seconds(), downloadSpeed, uploadSpeed)
@@ -70,7 +70,7 @@ func main() {
 
 	speedtestClient := speedtest.New()
 
-	ticker := time.NewTicker(10 * time.Second)
+	ticker := time.NewTicker(5 * time.Second)
 	defer ticker.Stop()
 
 	for {
