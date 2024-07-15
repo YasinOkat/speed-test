@@ -8,6 +8,10 @@ This project performs periodic internet speed tests using the `speedtest-go` lib
 - Docker
 - InfluxDB running in Docker
 
+## Screenshot
+
+![Screenshot](/Screenshot_20240716_014841.png)
+
 ## Setup
 
 ### 1. Install Go Packages
